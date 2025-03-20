@@ -57,7 +57,7 @@ exports.deposit = async (req, res) => {
             roundedNumber = btcAmount.toFixed(9);
         } else if (coin == "XRP") {
             response = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=xrp&vs_currencies=usd&precision=5`);
-            const conversionRates = response.data.xrp.usd;
+            const conversionRates = response.data.xrp;
             const myTotal = Number(conversionRates);
             const btcAmount = newAmount / myTotal;
             roundedNumber = btcAmount.toFixed(9);
