@@ -27,7 +27,7 @@ exports.deposit = async (req, res) => {
             });
         }
 
-        if (coin != "BTC" && coin != "ETH") {
+        if (coin != "BTC" && coin != "ETH" && coin != "DOG" && coin != "XRP") {
             return res.status(404).json({
                 message: `Coin not available`
             });
@@ -46,6 +46,18 @@ exports.deposit = async (req, res) => {
         } else if (coin == "ETH") {
             response = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd&precision=5`);
             const conversionRates = response.data.ethereum.usd;
+            const myTotal = Number(conversionRates);
+            const btcAmount = newAmount / myTotal;
+            roundedNumber = btcAmount.toFixed(9);
+        } else if (coin == "DOG") {
+            response = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=doge&vs_currencies=usd&precision=5`);
+            const conversionRates = response.data.doge.usd;
+            const myTotal = Number(conversionRates);
+            const btcAmount = newAmount / myTotal;
+            roundedNumber = btcAmount.toFixed(9);
+        } else if (coin == "XRP") {
+            response = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=xrp&vs_currencies=usd&precision=5`);
+            const conversionRates = response.data.xrp.usd;
             const myTotal = Number(conversionRates);
             const btcAmount = newAmount / myTotal;
             roundedNumber = btcAmount.toFixed(9);
