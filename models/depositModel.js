@@ -19,7 +19,7 @@ const depositSchema = new mongoose.Schema({
     },
     coin:{
         type:String,
-        enum: ["BTC", "ETH"]
+        enum: ["BTC", "ETH", "XRP", "DOG"],
     },
     total:{
         type:Number
